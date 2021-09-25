@@ -39,6 +39,12 @@ public class Movement : MonoBehaviour
         direction.z = direction.y;
         direction.y = 0;
 
+        if (Physics.CheckBox(transform.position + direction, new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, 3 << 1))
+        {
+            Debug.Log("WALL");
+        }
+        Debug.DrawRay(transform.position + direction, Vector3.up);
+
         if (direction.sqrMagnitude == 1)
         {
             var pivot = transform.position + (Vector3.down + direction) * 0.5f;
@@ -130,4 +136,5 @@ public class Movement : MonoBehaviour
 
         isMoving = false;
     }
+
 }
