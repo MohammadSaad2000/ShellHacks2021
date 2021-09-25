@@ -17,6 +17,8 @@ public class Movement : MonoBehaviour
     private bool isMoving = false;
     private bool isGrounded = true;
 
+    Vector3 directionU;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -38,12 +40,14 @@ public class Movement : MonoBehaviour
         Vector3 direction = controls.Movement.Move.ReadValue<Vector2>();
         direction.z = direction.y;
         direction.y = 0;
+        directionU = direction;
 
-        if (Physics.CheckBox(transform.position + direction, new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, 3 << 1))
+        if (direction.sqrMagnitude != 0 && Physics.CheckBox(transform.position + (direction * 0.5f), new Vector3(0.45f, 0.25f, 0.9f), Quaternion.LookRotation(direction), 1 << 3))
         {
-            Debug.Log("WALL");
+            //Debug.Log("WALL");
+            return;
         }
-        Debug.DrawRay(transform.position + direction, Vector3.up);
+        
 
         if (direction.sqrMagnitude == 1)
         {
@@ -136,5 +140,6 @@ public class Movement : MonoBehaviour
 
         isMoving = false;
     }
+
 
 }
