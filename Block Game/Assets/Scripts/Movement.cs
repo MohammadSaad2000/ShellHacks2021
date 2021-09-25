@@ -6,7 +6,6 @@ public class Movement : MonoBehaviour
 {
 
     InputMaster controls;
-    Rigidbody rigidbody;
 
 
     public Transform cameraTarget;
@@ -22,7 +21,6 @@ public class Movement : MonoBehaviour
     private void Start()
     {
         controls = InputManager.controls;
-        rigidbody = GetComponent<Rigidbody>();
         MaterialManager.mainInstance.changeSideMaterial("Side1", MaterialManager.mainInstance.blue);
         
     }
@@ -67,7 +65,7 @@ public class Movement : MonoBehaviour
 
         if (!isGrounded)
         {
-            rigidbody.isKinematic = false;
+            GameStateManager.mainInstance.Lose();
         }
        
     }
