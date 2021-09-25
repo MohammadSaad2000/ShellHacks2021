@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     InputMaster controls;
     Rigidbody rigidbody;
 
+
     public Transform cameraTarget;
     public Vector3 cameraOffset;
     public float rollSpeed = 3.0f;
@@ -22,6 +23,7 @@ public class Movement : MonoBehaviour
     {
         controls = InputManager.controls;
         rigidbody = GetComponent<Rigidbody>();
+        MaterialManager.mainInstance.changeSideMaterial("Side1", MaterialManager.mainInstance.blue);
         
     }
 
@@ -75,20 +77,33 @@ public class Movement : MonoBehaviour
         RaycastHit hit;
         int layerMask = 1 << 6;
         //Debug.DrawRay(new Vector3(transform.position.x, transform.position.y - 1.0f, transform.position.z), Vector3.up * 10);
-        string faceDownSideName;
+        string faceDownSideColor = "Gray";
         if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y - 1.0f, transform.position.z), Vector3.up, out hit, 1.0f, layerMask))
         {
-            faceDownSideName = hit.collider.name;
+            faceDownSideColor = hit.collider.GetComponent<MeshRenderer>().material.name.Replace(" (Instance)", "");
+           
         }
+
 
         layerMask = 1 << 7;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.0f, layerMask))
         {
             if (hit.collider.tag.Equals("Hazard"))
             {
-                Debug.LogWarning("You Lost!");
+                GameStateManager.mainInstance.Lose();
             }
-
+            if (hit.collider.tag.Contains("Hazard:"))
+            {
+                string[] hazardColors = hit.collider.tag.Replace("Hazard:", "").Split(',');
+                for (int i = 0; i < hazardColors.Length; i++)
+                {
+                    if(faceDownSideColor.Equals(hazardColors[i]))
+                    {
+                        GameStateManager.mainInstance.Lose();
+                    }
+                }
+                
+            }
 
         }
 

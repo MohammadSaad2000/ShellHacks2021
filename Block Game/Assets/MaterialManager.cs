@@ -4,20 +4,34 @@ using UnityEngine;
 
 public class MaterialManager : MonoBehaviour
 {
-    public static Material gray;
-    public static Material red;
-    public static Material orange;
-    public static Material yellow;
-    public static Material green;
-    public static Material blue;
-    public static Material purple;
+    public Material gray;
+    public Material red;
+    public Material orange;
+    public Material yellow;
+    public Material green;
+    public Material blue;
+    public Material purple;
+
+    [HideInInspector] public static MaterialManager mainInstance = null;
 
     MeshRenderer renderer;
 
+    private void Awake()
+    {
+        if (mainInstance != null && mainInstance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            mainInstance = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+
         renderer = GetComponent<MeshRenderer>();
         renderer.material = gray;
     }
@@ -28,7 +42,7 @@ public class MaterialManager : MonoBehaviour
         
     }
 
-    void changeSideMaterial(string sideName, Material material)
+    public void changeSideMaterial(string sideName, Material material)
     {
         Transform t = transform.Find(sideName);
         t.GetComponent<MeshRenderer>().material = material;
