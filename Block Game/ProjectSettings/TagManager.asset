@@ -15,6 +15,9 @@ TagManager:
   - StoryEffect2
   - StoryEffect3
   - StoryEffect4
+  - Hazard:Blue,Green
+  - Hazard:Green,Red
+  - Hazard:Blue,Red
   layers:
   - Default
   - TransparentFX

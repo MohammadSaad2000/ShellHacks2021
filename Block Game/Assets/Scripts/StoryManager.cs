@@ -16,6 +16,10 @@ public class StoryManager : MonoBehaviour
     public AudioSource blueSrc;
     public AudioSource greenSrc;
 
+    public GameObject winScreen;
+
+    [HideInInspector] public static int checkPointNumber = 0;
+    
     private bool hasRed = false;
     private bool hasBlue = false;
     private bool hasGreen = false;
@@ -27,6 +31,7 @@ public class StoryManager : MonoBehaviour
         redLight.SetActive(false);
         blueLight.SetActive(false);
         greenLight.SetActive(false);
+        winScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -43,6 +48,12 @@ public class StoryManager : MonoBehaviour
             {
                 whiteSrc.enabled = true;
                 whiteLightInner.SetActive(true);
+                for (int i = 1; i <= 6; i++)
+                {
+                    MaterialManager.mainInstance.changeSideMaterial("Side" + i, MaterialManager.mainInstance.gray);
+                }
+                winScreen.SetActive(true);
+                InputManager.controls.Movement.Disable();
             } else
             {
                 whiteSrc.enabled = false;
@@ -50,28 +61,32 @@ public class StoryManager : MonoBehaviour
                 redLight.SetActive(true);
                 blueLight.SetActive(true);
                 greenLight.SetActive(true);
+                checkPointNumber = 1;
             }
 
         } else if (other.tag.Equals("StoryEffect2"))
         {
             redLight.SetActive(false);
-            MaterialManager.mainInstance.changeSideMaterial("Side 1", MaterialManager.mainInstance.red);
-            MaterialManager.mainInstance.changeSideMaterial("Side 6", MaterialManager.mainInstance.red);
+            MaterialManager.mainInstance.changeSideMaterial("Side1", MaterialManager.mainInstance.red);
+            MaterialManager.mainInstance.changeSideMaterial("Side6", MaterialManager.mainInstance.red);
             hasRed = true;
+            checkPointNumber = 2;
         }
         else if (other.tag.Equals("StoryEffect3"))
         {
-            redLight.SetActive(false);
-            MaterialManager.mainInstance.changeSideMaterial("Side 2", MaterialManager.mainInstance.blue);
-            MaterialManager.mainInstance.changeSideMaterial("Side 4", MaterialManager.mainInstance.blue);
+            blueLight.SetActive(false);
+            MaterialManager.mainInstance.changeSideMaterial("Side2", MaterialManager.mainInstance.blue);
+            MaterialManager.mainInstance.changeSideMaterial("Side4", MaterialManager.mainInstance.blue);
             hasBlue = true;
+            checkPointNumber = 3;
         }
         else if (other.tag.Equals("StoryEffect4"))
         {
-            redLight.SetActive(false);
-            MaterialManager.mainInstance.changeSideMaterial("Side 3", MaterialManager.mainInstance.green);
-            MaterialManager.mainInstance.changeSideMaterial("Side 5", MaterialManager.mainInstance.green);
+            greenLight.SetActive(false);
+            MaterialManager.mainInstance.changeSideMaterial("Side3", MaterialManager.mainInstance.green);
+            MaterialManager.mainInstance.changeSideMaterial("Side5", MaterialManager.mainInstance.green);
             hasGreen = true;
+            checkPointNumber = 4;
         }
 
     }

@@ -15,8 +15,8 @@ public class Movement : MonoBehaviour
     public AudioSource moveSound;
     
 
-    private bool isMoving = false;
-    private bool isGrounded = true;
+    public static bool isMoving = false;
+    public static bool isGrounded = true;
 
 
     // Start is called before the first frame update
