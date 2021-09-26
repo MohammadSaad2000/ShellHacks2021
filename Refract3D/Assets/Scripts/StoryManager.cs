@@ -54,15 +54,15 @@ public class StoryManager : MonoBehaviour
                     MaterialManager.mainInstance.changeSideMaterial("Side" + i, MaterialManager.mainInstance.gray);
                 }
                 winScreen.SetActive(true);
-                RenderSettings.ambientIntensity = 10.0f;
+                RenderSettings.ambientIntensity = 3.0f;
                 InputManager.controls.Movement.Disable();
             } else
             {
                 whiteSrc.enabled = false;
                 whiteLightInner.SetActive(false);
-                redLight.SetActive(true);
-                blueLight.SetActive(true);
-                greenLight.SetActive(true);
+                redLight.SetActive(!hasRed);
+                blueLight.SetActive(!hasBlue);
+                greenLight.SetActive(!hasGreen);
                 checkPointNumber = 1;
             }
 
