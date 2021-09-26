@@ -25,6 +25,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""66de1e19-979f-4b03-b42d-fceb3fe0c1ae"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -82,6 +90,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89eaf736-c36e-4756-88ad-71b1f109d655"",
+                    ""path"": ""<Mouse>/delta/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -91,6 +110,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         // Movement
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
+        m_Movement_Look = m_Movement.FindAction("Look", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,11 +161,13 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Movement;
     private IMovementActions m_MovementActionsCallbackInterface;
     private readonly InputAction m_Movement_Move;
+    private readonly InputAction m_Movement_Look;
     public struct MovementActions
     {
         private @InputMaster m_Wrapper;
         public MovementActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Movement_Move;
+        public InputAction @Look => m_Wrapper.m_Movement_Look;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -158,6 +180,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
+                @Look.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnLook;
             }
             m_Wrapper.m_MovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -165,6 +190,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
             }
         }
     }
@@ -172,5 +200,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
     public interface IMovementActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
     }
 }

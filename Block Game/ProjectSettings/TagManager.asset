@@ -10,6 +10,8 @@ TagManager:
   - Hazard:Red,Yellow,Gray
   - Hazard:Blue,Yellow,Gray
   - Hazard:Red,Blue,Gray
+  - StoryElement
+  - StoryEffect1
   layers:
   - Default
   - TransparentFX

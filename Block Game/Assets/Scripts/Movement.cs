@@ -17,7 +17,6 @@ public class Movement : MonoBehaviour
     private bool isMoving = false;
     private bool isGrounded = true;
 
-    Vector3 directionU;
 
     // Start is called before the first frame update
     private void Start()
@@ -40,7 +39,8 @@ public class Movement : MonoBehaviour
         Vector3 direction = controls.Movement.Move.ReadValue<Vector2>();
         direction.z = direction.y;
         direction.y = 0;
-        directionU = direction;
+        //direction = Vector3.ProjectOnPlane(cameraTarget.transform.TransformDirection(direction), Vector3.up);
+        
 
         if (direction.sqrMagnitude != 0 && Physics.CheckBox(transform.position + (direction * 0.5f), new Vector3(0.45f, 0.25f, 0.9f), Quaternion.LookRotation(direction), 1 << 3))
         {
@@ -139,6 +139,22 @@ public class Movement : MonoBehaviour
         normalImpact.Play();
 
         isMoving = false;
+    }
+
+    Vector3 SnapTo(Vector3 v3, float snapAngle)
+    {
+        float angle = Vector3.Angle(v3, Vector3.up);
+        if (angle < snapAngle / 2.0f)          // Cannot do cross product 
+            return Vector3.up * v3.magnitude;  //   with angles 0 & 180
+        if (angle > 180.0f - snapAngle / 2.0f)
+            return Vector3.down * v3.magnitude;
+
+        float t = Mathf.Round(angle / snapAngle);
+        float deltaAngle = (t * snapAngle) - angle;
+
+        Vector3 axis = Vector3.Cross(Vector3.up, v3);
+        Quaternion q = Quaternion.AngleAxis(deltaAngle, axis);
+        return q * v3;
     }
 
 
