@@ -7,6 +7,9 @@ TagManager:
   - Hazard
   - Hazard:Blue
   - Hazard:Blue,Gray
+  - Hazard:Red,Yellow,Gray
+  - Hazard:Blue,Yellow,Gray
+  - Hazard:Red,Blue,Gray
   layers:
   - Default
   - TransparentFX
