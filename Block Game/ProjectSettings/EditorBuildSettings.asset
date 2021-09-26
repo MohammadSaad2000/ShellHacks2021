@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/start screen.unity
+    guid: 4126b8b083108244b9f025657954a895
+  - enabled: 1
+    path: Assets/Scenes/rainbow world.unity
+    guid: cf13302c1ab668d4d937e5df35742769
   m_configObjects: {}
