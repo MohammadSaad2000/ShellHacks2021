@@ -33,7 +33,7 @@ public class GameStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MaterialManager.mainInstance.changeSideMaterial("Side4", MaterialManager.mainInstance.red);
+
     }
 
     public void Lose()
