@@ -29,8 +29,8 @@ public class MaterialManager : MonoBehaviour
     void Start()
     {
 
-        renderer = GetComponent<MeshRenderer>();
-        renderer.material = gray;
+        //renderer = GetComponent<MeshRenderer>();
+        //renderer.material = gray;
     }
 
     // Update is called once per frame

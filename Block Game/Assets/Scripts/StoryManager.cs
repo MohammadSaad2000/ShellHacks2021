@@ -27,6 +27,7 @@ public class StoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        RenderSettings.ambientIntensity = 0.85f;
         whiteLightInner.SetActive(true);
         redLight.SetActive(false);
         blueLight.SetActive(false);
@@ -53,6 +54,7 @@ public class StoryManager : MonoBehaviour
                     MaterialManager.mainInstance.changeSideMaterial("Side" + i, MaterialManager.mainInstance.gray);
                 }
                 winScreen.SetActive(true);
+                RenderSettings.ambientIntensity = 10.0f;
                 InputManager.controls.Movement.Disable();
             } else
             {

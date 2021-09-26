@@ -10,6 +10,7 @@ public class GameStateManager : MonoBehaviour
 
     public GameObject player;
     public ParticleSystem loseParticleSystem;
+    public AudioSource loseSoundEffect;
 
     public Vector3 startPosition;
     public Vector3 centerPosition;
@@ -50,6 +51,7 @@ public class GameStateManager : MonoBehaviour
         loseParticleSystem.Play();
         controls.Movement.Disable();
         player.SetActive(false);
+        loseSoundEffect.Play();
         StartCoroutine(pauseforSeconds());
     }
 

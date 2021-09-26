@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerLook : MonoBehaviour
 {
     public float speed = 100.0f;
+    public float offset;
     private float rotY = 0.0f;
 
     InputMaster controls;
@@ -20,6 +21,6 @@ public class PlayerLook : MonoBehaviour
         float deltaX = controls.Movement.Look.ReadValue<float>();
         Debug.Log(deltaX);
         rotY += deltaX * speed * Time.deltaTime;
-        transform.rotation = Quaternion.Euler(transform.rotation.x, rotY, transform.rotation.z);
+        transform.rotation = Quaternion.Euler(transform.rotation.x, rotY + offset, transform.rotation.z);
     }
 }
