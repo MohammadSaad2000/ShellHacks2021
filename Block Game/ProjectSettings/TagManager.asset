@@ -10,8 +10,18 @@ TagManager:
   - Hazard:Red,Yellow,Gray
   - Hazard:Blue,Yellow,Gray
   - Hazard:Red,Blue,Gray
+<<<<<<< HEAD
   - StoryElement
   - StoryEffect1
+=======
+  - Hazard:Yellow,Blue,Purple,Green,Orange,Gray
+  - Hazard:Yellow,Blue,Purple,Red,Orange,Gray
+  - Hazard:Yellow,Red,Purple,Green,Orange,Gray
+  - Hazard:Yellow,Blue,Purple,Green,Orange
+  - Hazard:Yellow,Blue,Purple,Red,Orange
+  - Hazard:Yellow,Red,Purple,Green,Orange
+  - Hazard:Yellow,Blue,Purple,Green,Orange,Red,Gray
+>>>>>>> 0963cffce11795b80b6b36395cf91f6f31e1a2ee
   layers:
   - Default
   - TransparentFX
