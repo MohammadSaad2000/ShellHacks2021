@@ -6,8 +6,11 @@ public class MaterialManager : MonoBehaviour
 {
     public Material gray;
     public Material red;
+    public Material orange;
+    public Material yellow;
     public Material green;
     public Material blue;
+    public Material purple;
 
     [HideInInspector] public static MaterialManager mainInstance = null;
 
