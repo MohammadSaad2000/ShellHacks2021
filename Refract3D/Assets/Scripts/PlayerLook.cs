@@ -12,7 +12,7 @@ public class PlayerLook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        controls = InputManager.controls;
+        controls = InputManager.controls;        
     }
 
     // Update is called once per frame
@@ -21,6 +21,6 @@ public class PlayerLook : MonoBehaviour
         float deltaX = controls.Movement.Look.ReadValue<float>();
         Debug.Log(deltaX);
         rotY += deltaX * speed * Time.deltaTime;
-        transform.rotation = Quaternion.Euler(transform.rotation.x, rotY + offset, transform.rotation.z);
+        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, rotY + offset, transform.eulerAngles.z);
     }
 }

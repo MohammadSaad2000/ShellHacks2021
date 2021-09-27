@@ -11,6 +11,11 @@ public class StoryManager : MonoBehaviour
     public GameObject blueLight;
     public GameObject greenLight;
 
+    private bool exploded = false;
+    public ParticleSystem redExplode;
+    public ParticleSystem blueExplode;
+    public ParticleSystem greenExplode;
+
     public AudioSource whiteSrc;
     public AudioSource redSrc;
     public AudioSource blueSrc;
@@ -28,7 +33,7 @@ public class StoryManager : MonoBehaviour
     void Start()
     {
         RenderSettings.ambientIntensity = 0.85f;
-        whiteLightInner.SetActive(true);
+        whiteLightInner.GetComponent<MeshRenderer>().enabled = true;
         redLight.SetActive(false);
         blueLight.SetActive(false);
         greenLight.SetActive(false);
@@ -48,7 +53,7 @@ public class StoryManager : MonoBehaviour
             if(hasRed && hasGreen && hasBlue)
             {
                 whiteSrc.enabled = true;
-                whiteLightInner.SetActive(true);
+                whiteLightInner.GetComponent<MeshRenderer>().enabled = true;
                 for (int i = 1; i <= 6; i++)
                 {
                     MaterialManager.mainInstance.changeSideMaterial("Side" + i, MaterialManager.mainInstance.gray);
@@ -58,11 +63,17 @@ public class StoryManager : MonoBehaviour
                 InputManager.controls.Movement.Disable();
             } else
             {
-                whiteSrc.enabled = false;
-                whiteLightInner.SetActive(false);
-                redLight.SetActive(!hasRed);
-                blueLight.SetActive(!hasBlue);
-                greenLight.SetActive(!hasGreen);
+                if (!exploded)
+                {
+                    exploded = true;
+                    blueExplode.Play();
+                    redExplode.Play();
+                    greenExplode.Play();
+                    StartCoroutine("enableLights", 7.0f);
+                    whiteSrc.enabled = false;
+                    whiteLightInner.GetComponent<MeshRenderer>().enabled = false;
+                }
+            
                 checkPointNumber = 1;
             }
 
@@ -91,5 +102,13 @@ public class StoryManager : MonoBehaviour
             checkPointNumber = 4;
         }
 
+    }
+
+    IEnumerator enableLights(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        redLight.SetActive(true);
+        blueLight.SetActive(true);
+        greenLight.SetActive(true);
     }
 }
