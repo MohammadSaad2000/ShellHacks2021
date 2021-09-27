@@ -11,8 +11,6 @@ public class MaterialManager : MonoBehaviour
 
     [HideInInspector] public static MaterialManager mainInstance = null;
 
-    MeshRenderer renderer;
-
     private void Awake()
     {
         if (mainInstance != null && mainInstance != this)

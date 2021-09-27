@@ -23,8 +23,8 @@ public class StoryManager : MonoBehaviour
 
     public GameObject winScreen;
 
-    [HideInInspector] public static int checkPointNumber = 0;
-    
+    [HideInInspector] public static int checkPointNumber;
+
     private bool hasRed = false;
     private bool hasBlue = false;
     private bool hasGreen = false;
@@ -32,8 +32,9 @@ public class StoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        checkPointNumber = 0;
         RenderSettings.ambientIntensity = 0.85f;
-        whiteLightInner.GetComponent<MeshRenderer>().enabled = true;
+        whiteLightInner.SetActive(true);
         redLight.SetActive(false);
         blueLight.SetActive(false);
         greenLight.SetActive(false);
@@ -53,7 +54,7 @@ public class StoryManager : MonoBehaviour
             if(hasRed && hasGreen && hasBlue)
             {
                 whiteSrc.enabled = true;
-                whiteLightInner.GetComponent<MeshRenderer>().enabled = true;
+                whiteLightInner.SetActive(true);
                 for (int i = 1; i <= 6; i++)
                 {
                     MaterialManager.mainInstance.changeSideMaterial("Side" + i, MaterialManager.mainInstance.gray);
@@ -71,13 +72,12 @@ public class StoryManager : MonoBehaviour
                     greenExplode.Play();
                     StartCoroutine("enableLights", 7.0f);
                     whiteSrc.enabled = false;
-                    whiteLightInner.GetComponent<MeshRenderer>().enabled = false;
+                    whiteLightInner.SetActive(false);
                 }
-            
-                checkPointNumber = 1;
+                
             }
-
-        } else if (other.tag.Equals("StoryEffect2"))
+            checkPointNumber = 1;
+        } else if (exploded && other.tag.Equals("StoryEffect2"))
         {
             redLight.SetActive(false);
             MaterialManager.mainInstance.changeSideMaterial("Side1", MaterialManager.mainInstance.red);
@@ -85,7 +85,7 @@ public class StoryManager : MonoBehaviour
             hasRed = true;
             checkPointNumber = 2;
         }
-        else if (other.tag.Equals("StoryEffect3"))
+        else if (exploded && other.tag.Equals("StoryEffect3"))
         {
             blueLight.SetActive(false);
             MaterialManager.mainInstance.changeSideMaterial("Side2", MaterialManager.mainInstance.blue);
@@ -93,7 +93,7 @@ public class StoryManager : MonoBehaviour
             hasBlue = true;
             checkPointNumber = 3;
         }
-        else if (other.tag.Equals("StoryEffect4"))
+        else if (exploded && other.tag.Equals("StoryEffect4"))
         {
             greenLight.SetActive(false);
             MaterialManager.mainInstance.changeSideMaterial("Side3", MaterialManager.mainInstance.green);
