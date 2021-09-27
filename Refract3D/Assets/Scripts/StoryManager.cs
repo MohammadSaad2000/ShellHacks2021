@@ -70,7 +70,7 @@ public class StoryManager : MonoBehaviour
                     blueExplode.Play();
                     redExplode.Play();
                     greenExplode.Play();
-                    StartCoroutine("enableLights", 7.0f);
+                    StartCoroutine(enableLights(7.0f));
                     whiteSrc.enabled = false;
                     whiteLightInner.SetActive(false);
                 }
@@ -110,5 +110,8 @@ public class StoryManager : MonoBehaviour
         redLight.SetActive(true);
         blueLight.SetActive(true);
         greenLight.SetActive(true);
+        StartCoroutine(AudioManager.StartFadeIn(redSrc, 3.0f, 1.0f));
+        StartCoroutine(AudioManager.StartFadeIn(blueSrc, 3.0f, 1.0f));
+        StartCoroutine(AudioManager.StartFadeIn(greenSrc, 3.0f, 1.0f));
     }
 }
