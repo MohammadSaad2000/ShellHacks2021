@@ -10,6 +10,8 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene(1);
         StoryManager.checkPointNumber = 0;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
     }
 
     public void OnClickQuit()

@@ -60,6 +60,7 @@ public class StoryManager : MonoBehaviour
                     MaterialManager.mainInstance.changeSideMaterial("Side" + i, MaterialManager.mainInstance.gray);
                 }
                 winScreen.SetActive(true);
+                Cursor.visible = true;
                 RenderSettings.ambientIntensity = 3.0f;
                 InputManager.controls.Movement.Disable();
             } else

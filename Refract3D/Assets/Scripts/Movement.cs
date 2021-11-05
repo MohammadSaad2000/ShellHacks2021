@@ -133,7 +133,7 @@ public class Movement : MonoBehaviour
     {
         isMoving = true;
         
-        for (int i = 0; i < 90 / rollSpeed; i++)
+        for (int i = 0; i < 90.0f / rollSpeed; i++)
         {
             transform.RotateAround(pivot, axis, rollSpeed);
             yield return new WaitForSeconds(0.01f);
