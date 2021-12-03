@@ -18,7 +18,7 @@ public class GameStateManager : MonoBehaviour
     public Vector3 bluePosition;
     public Vector3 greenPosition;
 
-    public static GameStateManager mainInstance = null;
+    public static GameStateManager mainInstance = null;;
 
     private void Awake()
     {
